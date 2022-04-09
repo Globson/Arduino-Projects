@@ -1,5 +1,7 @@
 void setup() {
   // put your setup code here, to run once:
+  Serial.begin(9600);
+  
   pinMode(2,OUTPUT);
   pinMode(3,INPUT);
   
@@ -15,7 +17,7 @@ void setup() {
   pinMode(12,OUTPUT);
   pinMode(13,OUTPUT);
 
-  pinMode(A0,INPUT);
+  pinMode(A1,INPUT);
   pinMode(A2,OUTPUT);
 }
 
@@ -232,13 +234,17 @@ double bipbip(double tempo){
 void loop() {
   // put your main code here, to run repeatedly:
 
-    while(digitalRead(3)==0 && analogRead(A0)>300){
+    while(digitalRead(3)==0 && analogRead(A1)>300){
       delay(100);
+      Serial.print("Sensor de luz: ");
+      Serial.println(analogRead(A1));
     }
-    if(digitalRead(3)==1 || analogRead(A0)<=300){
+    if(digitalRead(3)==1 || analogRead(A1)<=300){
       digitalWrite(2,HIGH);
       delay(60);
       digitalWrite(2,LOW);
+      Serial.print("Sensor de luz: ");
+      Serial.println(analogRead(A1));
     }
 
     colocaUmNumero(7);
@@ -284,7 +290,8 @@ void loop() {
         intervalo = duracaoMinima;
         tempo -= (intervalo + 60);
       }
-      
+      Serial.print("Intervalo: ");
+      Serial.println(intervalo);
       delay(intervalo);
     }
 
