@@ -91,6 +91,90 @@ void segmentoAleatorio(){
   }
 }
 
+long segmentoInfinitoAtual = 7;
+void segmentoInfinito(){
+  switch (segmentoInfinitoAtual){
+    case 7:
+      digitalWrite(7,HIGH);
+      digitalWrite(8,LOW);
+      digitalWrite(9,LOW);
+      digitalWrite(10,LOW);
+      digitalWrite(11,LOW);
+      digitalWrite(12,LOW);
+      digitalWrite(13,LOW);
+      break;
+    case 8:
+      digitalWrite(7,LOW);
+      digitalWrite(8,HIGH);
+      digitalWrite(9,LOW);
+      digitalWrite(10,LOW);
+      digitalWrite(11,LOW);
+      digitalWrite(12,LOW);
+      digitalWrite(13,LOW);
+      break;
+    case 9:
+      digitalWrite(7,LOW);
+      digitalWrite(8,LOW);
+      digitalWrite(9,HIGH);
+      digitalWrite(10,LOW);
+      digitalWrite(11,LOW);
+      digitalWrite(12,LOW);
+      digitalWrite(13,LOW);
+      break;
+    case 10:
+      digitalWrite(7,LOW);
+      digitalWrite(8,LOW);
+      digitalWrite(9,LOW);
+      digitalWrite(10,LOW);
+      digitalWrite(11,LOW);
+      digitalWrite(12,LOW);
+      digitalWrite(13,HIGH);
+      break;
+    case 11:
+      digitalWrite(7,LOW);
+      digitalWrite(8,LOW);
+      digitalWrite(9,LOW);
+      digitalWrite(10,HIGH);
+      digitalWrite(11,LOW);
+      digitalWrite(12,LOW);
+      digitalWrite(13,LOW);
+      break;
+    case 12:
+      digitalWrite(7,LOW);
+      digitalWrite(8,LOW);
+      digitalWrite(9,LOW);
+      digitalWrite(10,LOW);
+      digitalWrite(11,HIGH);
+      digitalWrite(12,LOW);
+      digitalWrite(13,LOW);
+      break;
+    case 13:
+      digitalWrite(7,LOW);
+      digitalWrite(8,LOW);
+      digitalWrite(9,LOW);
+      digitalWrite(10,LOW);
+      digitalWrite(11,LOW);
+      digitalWrite(12,HIGH);
+      digitalWrite(13,LOW);
+      break;
+     case 14:
+      digitalWrite(7,LOW);
+      digitalWrite(8,LOW);
+      digitalWrite(9,LOW);
+      digitalWrite(10,LOW);
+      digitalWrite(11,LOW);
+      digitalWrite(12,LOW);
+      digitalWrite(13,HIGH);
+      break;
+  }
+  if(segmentoInfinitoAtual<=13){
+    segmentoInfinitoAtual++;
+  }
+  else{
+    segmentoInfinitoAtual = 7;
+  }
+}
+
 void colocaUmNumero(int num){
   switch (num){
     case 0:
@@ -106,8 +190,8 @@ void colocaUmNumero(int num){
       digitalWrite(7,HIGH);
       digitalWrite(8,LOW);
       digitalWrite(9,LOW);
-      digitalWrite(10,LOW);
-      digitalWrite(11,HIGH);
+      digitalWrite(10,HIGH);
+      digitalWrite(11,LOW);
       digitalWrite(12,LOW);
       digitalWrite(13,LOW);
       break;
@@ -133,8 +217,8 @@ void colocaUmNumero(int num){
       digitalWrite(7,HIGH);
       digitalWrite(8,LOW);
       digitalWrite(9,LOW);
-      digitalWrite(10,LOW);
-      digitalWrite(11,HIGH);
+      digitalWrite(10,HIGH);
+      digitalWrite(11,LOW);
       digitalWrite(12,HIGH);
       digitalWrite(13,HIGH);
       break;
@@ -142,8 +226,8 @@ void colocaUmNumero(int num){
       digitalWrite(7,HIGH);
       digitalWrite(8,HIGH);
       digitalWrite(9,LOW);
-      digitalWrite(10,HIGH);
-      digitalWrite(11,LOW);
+      digitalWrite(10,LOW);
+      digitalWrite(11,HIGH);
       digitalWrite(12,HIGH);
       digitalWrite(13,HIGH);
       break;
@@ -151,8 +235,8 @@ void colocaUmNumero(int num){
       digitalWrite(7,HIGH);
       digitalWrite(8,HIGH);
       digitalWrite(9,HIGH);
-      digitalWrite(10,HIGH);
-      digitalWrite(11,LOW);
+      digitalWrite(10,LOW);
+      digitalWrite(11,HIGH);
       digitalWrite(12,HIGH);
       digitalWrite(13,HIGH);
       break;
@@ -249,32 +333,46 @@ void loop() {
 
     colocaUmNumero(7);
     ledRGB('R');
-    delay(600);
+    delay(300);
+    colocaUmNumero(-1);
+    delay(150);
     colocaUmNumero(3);
     ledRGB('G');
-    delay(600);
+    delay(300);
+    colocaUmNumero(-1);
+    delay(150);
     colocaUmNumero(5);
     ledRGB('B');
-    delay(600);
+    delay(300);
+    colocaUmNumero(-1);
+    delay(150);
     colocaUmNumero(5);
     ledRGB('R');
-    delay(600);
+    delay(300);
+    colocaUmNumero(-1);
+    delay(150);
     colocaUmNumero(6);
     ledRGB('G');
-    delay(600);
+    delay(300);
+    colocaUmNumero(-1);
+    delay(150);
     colocaUmNumero(0);
     ledRGB('B');
-    delay(600);
+    delay(300);
+    colocaUmNumero(-1);
+    delay(150);
     colocaUmNumero(8);
     ledRGB('R');
-    delay(600);
+    delay(300);
+    colocaUmNumero(-1);
+    delay(150);
     ledRGB('S');
 
     double tempo = 33500; //ms
     double duracaoMinima;
     while(tempo>1000){
       if(tempo>10000){
-        segmentoAleatorio();
+        segmentoInfinito();
       }
       else{
         colocaUmNumero(floor(tempo/1000));
@@ -311,6 +409,7 @@ void loop() {
       delay(70);
     }
     
+    delay(600);
     colocaUmNumero(-1);
     ledRGB('S');
 }
