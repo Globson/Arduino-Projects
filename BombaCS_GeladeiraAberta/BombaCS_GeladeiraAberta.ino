@@ -1,8 +1,13 @@
+/*
+Author: Samuel Sena (Globson)
+Designed for refrigerator door control and temperature monitoring.
+*/
+
 #include <Thermistor.h>
 void setup()
 {
   // put your setup code here, to run once:
-  //Serial.begin(9600);
+  // Serial.begin(9600);
 
   pinMode(2, OUTPUT);
   pinMode(3, INPUT);
@@ -407,9 +412,9 @@ void loop()
           break;
         }
         int temperature = temp.getTemp();
-        //Serial.print("Temperatura no Sensor eh: ");
-        //Serial.print(temperature);
-        //Serial.println("*C");
+        // Serial.print("Temperatura no Sensor eh: ");
+        // Serial.print(temperature);
+        // Serial.println("*C");
         if (temperature < 10 && temperature > -10)
         {
           if (temperature >= 0)
@@ -487,8 +492,8 @@ void loop()
       intervalo = duracaoMinima;
       tempo -= (intervalo + 60);
     }
-    //Serial.print("Intervalo: ");
-    //Serial.println(intervalo);
+    // Serial.print("Intervalo: ");
+    // Serial.println(intervalo);
     delay(intervalo);
   }
 
@@ -496,7 +501,12 @@ void loop()
   {
     if (analogRead(A3) > 299)
     {
+      analogWrite(A2, 0);
+      colocaUmNumero(-1);
+      ledRGB('S');
       paraDeEncherOSaco(120000);
+      colocaUmNumero(0);
+      analogWrite(A2, 130);
     }
     colocaUmNumero(0);
     analogWrite(A2, 130);
@@ -504,7 +514,12 @@ void loop()
     { // explosao
       if (analogRead(A3) > 299)
       {
+        analogWrite(A2, 0);
+        colocaUmNumero(-1);
+        ledRGB('S');
         paraDeEncherOSaco(120000);
+        colocaUmNumero(0);
+        analogWrite(A2, 130);
       }
       if (i % 5 == 0)
       {
