@@ -1,0 +1,5 @@
+{
+    "board": "arduino:avr:uno",
+    "programmer": "arduino:avrispmkii",
+    "sketch": "BombaCS_GeladeiraAberta\\BombaCS_GeladeiraAberta.ino"
+}
