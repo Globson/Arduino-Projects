@@ -260,11 +260,11 @@ void ledRGB(char S)
   }
 }
 
-double bipbip(double tempo)
+unsigned long bipbip(unsigned long tempo)
 {
   analogWrite(A2, 130);
   digitalWrite(2, HIGH);
-  double delay1 = 60;
+  unsigned long delay1 = 60;
   delay(delay1);
   analogWrite(A2, 0);
   digitalWrite(2, LOW);
@@ -384,9 +384,9 @@ void animacaoBombaCs()
   ledRGB('S');
 }
 
-void paraDeEncherOSaco(double pause)
+void paraDeEncherOSaco(unsigned long pause)
 {
-  for (double i = pause; i > 0; i -= 50)
+  for (unsigned long i = pause; i > 0; i -= 50)
   {
     if (digitalRead(3) == 1)
     {
@@ -463,8 +463,8 @@ void loop()
   }
   animacaoBombaCs();
 
-  double tempo = 33500; // ms
-  double duracaoMinima;
+  unsigned long tempo = 33500; // ms
+  unsigned long duracaoMinima;
   while (tempo > 1000 && digitalRead(3) == 0)
   {
     if (analogRead(A3) > 299)
@@ -480,8 +480,8 @@ void loop()
       colocaUmNumero(floor(tempo / 1000));
     }
 
-    double bipTime = bipbip(tempo);
-    double intervalo;
+    unsigned long bipTime = bipbip(tempo);
+    unsigned long intervalo;
     if (tempo > 3250)
     {
       intervalo = (tempo / 38) - bipTime;
