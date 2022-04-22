@@ -274,62 +274,13 @@ unsigned long bipbip(unsigned long tempo)
 
 void animacao()
 {
-  segmentoInfinito();
-  delay(50);
-  colocaUmNumero(-1);
-  delay(50);
-  segmentoInfinito();
-  delay(50);
-  colocaUmNumero(-1);
-  delay(50);
-  segmentoInfinito();
-  delay(50);
-  colocaUmNumero(-1);
-  delay(50);
-  segmentoInfinito();
-  delay(50);
-  colocaUmNumero(-1);
-  delay(50);
-  segmentoInfinito();
-  delay(50);
-  colocaUmNumero(-1);
-  delay(50);
-  segmentoInfinito();
-  delay(50);
-  colocaUmNumero(-1);
-  delay(50);
-  segmentoInfinito();
-  delay(50);
-  colocaUmNumero(-1);
-  delay(50);
-  segmentoInfinito();
-  delay(50);
-  colocaUmNumero(-1);
-  delay(50);
-  segmentoInfinito();
-  delay(50);
-  colocaUmNumero(-1);
-  delay(50);
-  segmentoInfinito();
-  delay(50);
-  colocaUmNumero(-1);
-  delay(50);
-  segmentoInfinito();
-  delay(50);
-  colocaUmNumero(-1);
-  delay(50);
-  segmentoInfinito();
-  delay(50);
-  colocaUmNumero(-1);
-  delay(50);
-  segmentoInfinito();
-  delay(50);
-  colocaUmNumero(-1);
-  delay(50);
-  segmentoInfinito();
-  delay(50);
-  colocaUmNumero(-1);
-  delay(50);
+  for (int i = 0; i < 14; i++)
+  {
+    segmentoInfinito();
+    delay(50);
+    colocaUmNumero(-1);
+    delay(50);
+  }
 }
 
 void animacaoBombaCs()
@@ -398,13 +349,14 @@ void TempoDeAssalto(unsigned long tempo)
     }
     else
     {
-      for (int j = 0; j < 20; j++)
+      for (int j = 0; j < 10; j++)
       {
         digitalWrite(2, HIGH);
         segmentoInfinito();
         delay(50);
         digitalWrite(2, LOW);
         colocaUmNumero(-1);
+        delay(50);
       }
     }
   }
