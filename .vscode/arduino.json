@@ -1,5 +1,6 @@
 {
     "board": "arduino:avr:uno",
     "programmer": "arduino:avrispmkii",
-    "sketch": "BombaCS_GeladeiraAberta\\BombaCS_GeladeiraAberta.ino"
+    "sketch": "BombaPermissiva_GeladeiraAberta\\BombaPermissiva_GeladeiraAberta.ino",
+    "port": "COM6"
 }

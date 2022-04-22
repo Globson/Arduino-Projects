@@ -339,13 +339,18 @@ void TempoDeAssalto(unsigned long tempo)
 {
   for (unsigned long i = tempo; i > 0; i -= 1000)
   {
+    if (digitalRead(3) == 1)
+    {
+      return;
+    }
     if (i < 10000)
     {
       colocaUmNumero(i / 1000);
       digitalWrite(2, HIGH);
-      delay(1000);
+      delay(850);
       colocaUmNumero(-1);
       digitalWrite(2, LOW);
+      delay(150);
     }
     else
     {
@@ -368,7 +373,7 @@ void paraDeEncherOSaco(unsigned long pause)
   {
     if (digitalRead(3) == 1)
     {
-      break;
+      return;
     }
     segmentoInfinito();
     delay(50);
