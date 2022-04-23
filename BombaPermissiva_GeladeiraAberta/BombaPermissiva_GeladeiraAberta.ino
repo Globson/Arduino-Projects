@@ -3,11 +3,14 @@ Author: Samuel Sena (Globson)
 Designed for refrigerator door control and temperature monitoring.
 */
 
-#include <Thermistor.h>
+//#include <Thermistor.h>
+#include <thermistor.h>
+
+#define NTC_PIN A1
 void setup()
 {
   // put your setup code here, to run once:
-  // Serial.begin(9600);
+  Serial.begin(9600);
 
   pinMode(2, OUTPUT);
   pinMode(3, INPUT);
@@ -28,7 +31,15 @@ void setup()
   pinMode(A2, OUTPUT);
   pinMode(A3, INPUT);
 }
-Thermistor temp(1);
+// Thermistor temp(1);
+//  Thermistor object
+THERMISTOR thermistor(NTC_PIN, // Analog pin
+                      10000,   // Nominal resistance at 25 ºC
+                      3950,    // thermistor's beta coefficient
+                      9750);  // Value of the series resistor
+
+// Global temperature reading
+//uint16_t temp;
 
 long segmentoInfinitoAtual = 7;
 void segmentoInfinito()
@@ -394,10 +405,11 @@ void loop()
         {
           break;
         }
-        int temperature = temp.getTemp();
-        // Serial.print("Temperatura no Sensor eh: ");
-        // Serial.print(temperature);
-        // Serial.println("*C");
+        //int temperature = temp.getTemp();
+        int temperature = thermistor.read();
+        Serial.print("Temperatura lida no Sensor eh: ");
+        Serial.print(temperature);
+        Serial.println("*C");
         if (temperature < 10 && temperature > -10)
         {
           if (temperature >= 0)
