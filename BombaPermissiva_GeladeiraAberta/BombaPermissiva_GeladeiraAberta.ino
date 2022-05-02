@@ -35,7 +35,7 @@ void setup()
 //  Thermistor object
 THERMISTOR thermistor(NTC_PIN, // Analog pin
                       10000,   // Nominal resistance at 25 ºC
-                      3950,    // thermistor's beta coefficient
+                      3000,    // thermistor's beta coefficient
                       9850);  // Value of the series resistor
 
 // Global temperature reading
