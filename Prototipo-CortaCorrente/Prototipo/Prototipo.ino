@@ -43,7 +43,7 @@ byte bateria[8] = { 0b11111, 0b11011, 0b10001, 0b11011, 0b11111, 0b11111, 0b1000
 byte celsius[8] = { 0b00100, 0b01010, 0b00100, 0b00011, 0b00100, 0b00100, 0b00011, 0b00000 };
 byte lock[8] = {0b01110, 0b10001, 0b10001, 0b11111, 0b11011, 0b11011, 0b11111, 0b00000 };
 byte unlock[8] = { 0b01110, 0b10001, 0b10000, 0b11111, 0b11011, 0b11011, 0b11111,0b00000 };
-byte date[8] = { 0b10101, 0b11111, 0b11011, 0b10011, 0b11011, 0b11011, 0b10001,0b11111 };
+byte date[8] = { 0b10101, 0b11111, 0b11011, 0b10011, 0b11011, 0b10001, 0b11111, 0b00000 };
 
 void setup() {
   cortado = false;
@@ -139,7 +139,7 @@ void loop() {
     lcd.setBacklight(LOW);
   }
   
-  if (!cortado && !unlocked && (now- startup > 45)) {
+  if (!unlocked && !cortado && (Rtc.GetDateTime() - startup > 10)) {
     cortado = true;
     lcd.setBacklight(HIGH);
     backLightBegin = now;
