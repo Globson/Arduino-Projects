@@ -43,6 +43,7 @@ byte bateria[8] = { 0b11111, 0b11011, 0b10001, 0b11011, 0b11111, 0b11111, 0b1000
 byte celsius[8] = { 0b00100, 0b01010, 0b00100, 0b00011, 0b00100, 0b00100, 0b00011, 0b00000 };
 byte lock[8] = {0b01110, 0b10001, 0b10001, 0b11111, 0b11011, 0b11011, 0b11111, 0b00000 };
 byte unlock[8] = { 0b01110, 0b10001, 0b10000, 0b11111, 0b11011, 0b11011, 0b11111,0b00000 };
+byte date[8] = { 0b10101, 0b11111, 0b11011, 0b10011, 0b11011, 0b11011, 0b10001,0b11111 };
 
 void setup() {
   cortado = false;
@@ -90,7 +91,7 @@ void setup() {
   lcd.setBacklight(HIGH);
   lcd.createChar(1, lock);
   lcd.createChar(2, bateria);
-  lcd.createChar(3, coracao);
+  lcd.createChar(3, date);
   lcd.createChar(4, smile);
   lcd.createChar(5, umid);
   lcd.createChar(6, temp);
@@ -100,13 +101,16 @@ void setup() {
 
 void loop() {
 
-  if (now.TotalSeconds64() + 20 < Rtc.GetDateTime().TotalSeconds64()) {
+  if (now + 20 < Rtc.GetDateTime()) {
     now = Rtc.GetDateTime();
     
 
     lcd.setCursor(0, 0);
     lcd.write((byte)7);
-    lcd.print(ConvertToDateTime(now));
+    String timeDate = ConvertToDateTime(now);
+    lcd.print(timeDate.substring(0,7));
+    lcd.write((byte)3);
+    lcd.print(timeDate.substring(7,13));
     lcd.write((byte)1);
     DHT.read11(pinoDHT11);             //LÊ AS INFORMAÇÕES DO SENSOR
 
@@ -131,8 +135,11 @@ void loop() {
     Serial.println("*C");   
 
   }
+  if (now > backLightBegin + 30) {
+    lcd.setBacklight(LOW);
+  }
   
-  if (!cortado && !unlocked && (now.TotalSeconds64() - startup.TotalSeconds64() > 45)) {
+  if (!cortado && !unlocked && (now- startup > 45)) {
     cortado = true;
     lcd.setBacklight(HIGH);
     backLightBegin = now;
@@ -229,10 +236,7 @@ void loop() {
     lcd.createChar(1, lock);
     delay(1500);
   }
-
-  if (now.TotalSeconds64() > backLightBegin.TotalSeconds64() + 30) {
-    lcd.setBacklight(LOW);
-  }
+  
 }
 
 
@@ -256,7 +260,7 @@ String ConvertToDateTime(const RtcDateTime& dt) {
   unsigned int ano = dt.Year() - 2000;
   snprintf_P(datestring,
              countof(datestring),
-             PSTR("%02u:%02u  %02u/%02u  "),
+             PSTR("%02u:%02u  %02u/%02u "),
              dt.Hour(),
              dt.Minute(),
              dt.Day(),
