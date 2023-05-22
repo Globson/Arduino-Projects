@@ -6,6 +6,7 @@
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 #include "dht.h" 
+#include <IRremote.h> //INCLUSÃO DE BIBLIOTECA
 
 #define countof(a) (sizeof(a) / sizeof(a[0])) 
 
@@ -44,6 +45,14 @@ byte celsius[8] = { 0b00100, 0b01010, 0b00100, 0b00011, 0b00100, 0b00100, 0b0001
 byte lock[8] = {0b01110, 0b10001, 0b10001, 0b11111, 0b11011, 0b11011, 0b11111, 0b00000 };
 byte unlock[8] = { 0b01110, 0b10001, 0b10000, 0b11111, 0b11011, 0b11011, 0b11111,0b00000 };
 byte date[8] = { 0b10101, 0b11111, 0b11011, 0b10011, 0b11011, 0b10001, 0b11111, 0b00000 };
+
+//Controle IR
+int RECV_PIN = 2;
+IRrecv irrecv(RECV_PIN); 
+decode_results leituraControle; 
+
+//Controle Mapeado
+
 
 void setup() {
   cortado = false;
@@ -97,6 +106,8 @@ void setup() {
   lcd.createChar(6, temp);
   lcd.createChar(7, clock);
   lcd.createChar(8, celsius);
+
+  irrecv.enableIRIn();
 }
 
 void loop() {
@@ -137,6 +148,13 @@ void loop() {
   }
   if (now > backLightBegin + 30) {
     lcd.setBacklight(LOW);
+  }
+  
+  if (irrecv.decode(&leituraControle)) {
+    now = Rtc.GetDateTime();
+    backLightBegin = now;
+    lcd.setBacklight(HIGH);
+    irrecv.resume(); //AGUARDA O RECEBIMENTO DE UM NOVO SINAL IR
   }
   
   if (!unlocked && !cortado && (Rtc.GetDateTime() - startup > 10)) {
