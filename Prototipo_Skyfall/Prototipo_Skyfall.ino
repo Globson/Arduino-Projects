@@ -52,6 +52,27 @@ IRrecv irrecv(RECV_PIN);
 decode_results leituraControle; 
 
 //Controle Mapeado
+const unsigned long tecla0 = 16738455;
+const unsigned long tecla1 = 16724175;
+const unsigned long tecla2 = 16718055;
+const unsigned long tecla3 = 16743045;
+const unsigned long tecla4 = 16716015;
+const unsigned long tecla5 = 16726215;
+const unsigned long tecla6 = 16734885;
+const unsigned long tecla7 = 16728765;
+const unsigned long tecla8 = 16730805;
+const unsigned long tecla9 = 16732845;
+const unsigned long tecla100 = 16750695;
+const unsigned long tecla200 = 16756815;
+const unsigned long teclaLess = 16769055;
+const unsigned long teclaPlus = 16754775;
+const unsigned long teclaEQ = 16748655;
+const unsigned long teclaPrev = 16720605;
+const unsigned long teclaNext = 16712445;
+const unsigned long teclaPP = 16761405;
+const unsigned long teclaCHL = 16753245;
+const unsigned long teclaCH = 16736925;
+const unsigned long teclaCHP = 16769565;
 
 
 void setup() {
@@ -146,14 +167,21 @@ void loop() {
     Serial.println("*C");   
 
   }
+
   if (now > backLightBegin + 30) {
     lcd.setBacklight(LOW);
   }
-  
+
   if (irrecv.decode(&leituraControle)) {
-    now = Rtc.GetDateTime();
-    backLightBegin = now;
-    lcd.setBacklight(HIGH);
+    Serial.println(leituraControle.value);
+    if(leituraControle.value == teclaCHL){
+      lcd.setBacklight(LOW);
+    }
+    else if(leituraControle.value == teclaCHP){
+      now = Rtc.GetDateTime();
+      backLightBegin = now;
+      lcd.setBacklight(HIGH);
+    }
     irrecv.resume(); //AGUARDA O RECEBIMENTO DE UM NOVO SINAL IR
   }
   
