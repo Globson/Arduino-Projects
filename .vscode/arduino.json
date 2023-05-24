@@ -1,6 +1,6 @@
 {
     "board": "arduino:avr:uno",
-    "programmer": "arduino:avrispmkii",
-    "sketch": " Prototipo-CortaCorrente\\Prototipo\\Prototipo.ino",
+    "programmer": "avrisp",
+    "sketch": "Prototipo_Skyfall\\Prototipo_Skyfall.ino",
     "port": "COM4"
 }
